@@ -9,4 +9,9 @@ let gmap gr f = e_fold gr (fun acu x -> new_arc acu ({src = x.src ; tgt = x.tgt 
 
 (* Replace _gr and _f by gr and f when you start writing the real function. *)
 
-let add_arc _gr = assert false
+let add_arc gr id1 id2 (n : int) = 
+    let arc = find_arc gr id1 id2 in
+    match arc with
+      |None -> new_arc gr {src = id1 ; tgt = id2 ; lbl = n};
+      |Some x-> new_arc gr {x with lbl = x.lbl + n};
+

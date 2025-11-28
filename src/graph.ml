@@ -57,7 +57,7 @@ let find_arc gr id1 id2 = List.find_opt (fun arc -> arc.tgt = id2) (out_arcs gr 
 let new_node gr id =
   if node_exists gr id then raise (Graph_error ("Node " ^ string_of_int id ^ " already exists in the graph."))
   else (id, []) :: gr
-
+  
 let new_arc gr arc =
 
   (* Existing out-arcs *)
