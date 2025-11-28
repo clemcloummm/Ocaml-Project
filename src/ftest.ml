@@ -38,7 +38,8 @@ let () =
   let new_arc = gmap new_arc string_of_int in
 
   (* Rewrite the graph that has been read. *)
-  let () = write_file outfile new_arc in
+  (*let () = write_file outfile new_arc in*)
+  let () = export outfile new_arc in
 
   ()
 
