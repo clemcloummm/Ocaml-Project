@@ -29,17 +29,17 @@ let () =
   (* Open file *)
   let graph = from_file infile in
 
-  (*let wo_arc = clone_nodes graph in*)
+  let wo_arc = clone_nodes graph in
   
-  let new_graph = gmap graph (fun x -> (2 + int_of_string x)) in
+  (*let new_graph = gmap graph (fun x -> (2 + int_of_string x)) in
   
   let new_arc = add_arc new_graph 1 4 50 in
 
-  let new_arc = gmap new_arc string_of_int in
+  let new_arc = gmap new_arc string_of_int in*)
 
   (* Rewrite the graph that has been read. *)
-  (*let () = write_file outfile new_arc in*)
-  let () = export outfile new_arc in
+  let () = write_file outfile wo_arc in
+  (*let () = export outfile new_arc in*)
 
   ()
 
