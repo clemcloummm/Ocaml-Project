@@ -1,4 +1,5 @@
 open Graph
+open Tools
 
 let find_path gr src dest =
   let rec dfs node path =
@@ -30,3 +31,9 @@ let find_path gr src dest =
           end 
     in
   aux [] nodePath
+
+  let algo_ford gr src dest = 
+    let gr_res = gmap gr (fun x -> 0) in 
+    let rec aux acu path =
+      match path with
+        | 
