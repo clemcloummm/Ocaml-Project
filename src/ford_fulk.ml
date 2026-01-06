@@ -6,7 +6,8 @@ let find_path gr src dest =
     if node = dest then List.rev path
     else
       let voisins_arcs = out_arcs gr node in
-      let voisins = List.map (fun x -> x.tgt) voisins_arcs in
+      let arcs_utilisables = List.filter (fun arc -> arc.lbl > 0) voisins_arcs in
+      let voisins = List.map (fun x -> x.tgt) arcs_utilisables in
       let voisinsNotVisited = List.filter (fun x -> not (List.mem x path)) voisins in
       iterVoisins voisinsNotVisited path
 
@@ -32,8 +33,18 @@ let find_path gr src dest =
     in
   aux [] nodePath
 
-  let algo_ford gr src dest = 
-    let gr_res = gmap gr (fun x -> 0) in 
-    let rec aux acu path =
-      match path with
-        | 
+  let find_min_capacity arcPath =
+  match arcPath with
+  | [] -> 0
+  | x :: rest -> List.fold_left (fun acc arc -> min acc arc.lbl) x.lbl rest
+
+  let algo_ford gr src dest =
+    let rec aux acu =
+      let nodePath = find_path acu src dest in
+      match nodePath with
+        | [] -> acu 
+        | node_path ->
+          let arcPath = find_arc_path acu node_path in
+          let minCapa = find_min_capacity arcPath in
+  in
+  aux gr
