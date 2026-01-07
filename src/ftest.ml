@@ -41,12 +41,12 @@ let () =
   let nodePath = find_path new_graph 0 5 in
 
   let arcPath = find_arc_path new_graph nodePath in*)
-  let test = algo_ford new_graph 0 5 in
+  let test = algo_ford new_graph 0 12 in
 
   let new_graph2 = gmap test (fun x -> (string_of_int x)) in
 
   (* Rewrite the graph that has been read. *)
-  let () = write_file outfile new_graph2 in
+  (*let () = write_file outfile new_graph2 in*)
   let () = export outfile new_graph2 in
   
   ()

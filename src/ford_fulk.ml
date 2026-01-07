@@ -38,6 +38,13 @@ let find_path gr src dest =
       | [] -> 0
       | x :: rest -> List.fold_left (fun acc arc -> min acc arc.lbl) x.lbl rest
 
+  let rec add_flow gr list_arc capa = 
+    match list_arc with
+      |[] -> gr
+      |x :: rest -> let gr1 = add_arc gr x.src x.tgt (-capa) in 
+      let gr2 = add_arc gr1 x.tgt x.src capa in
+      add_flow gr2 rest capa
+
   let algo_ford gr src dest =
     let rec aux acu =
       let nodePath = find_path acu src dest in
@@ -46,6 +53,11 @@ let find_path gr src dest =
         | path ->
           let arcPath = find_arc_path acu path in
           let minCapa = find_min_capacity arcPath in
-          aux (gmap acu (fun x -> x - minCapa))
+          aux (add_flow acu arcPath minCapa)
   in
   aux gr
+
+  let graph_fin gr =
+    let gr_node = clone_nodes gr in
+    let rec aux acu = 
+      

@@ -9,5 +9,11 @@ val find_arc_path : id graph -> id list -> id arc list
 (*Returns the minimum capacity of an arc path*)
 val find_min_capacity : id arc list -> int
 
+(*Creates the correposnding arcs in the flow graph *)
+val add_flow : id graph -> 'a arc list -> id -> id graph
+
 (*Returns the maximum flows value of a graph applying the Ford-Fulkerson algorithm*)
 val algo_ford : id graph -> id -> id -> id graph
+
+(*Rteurns the graphs with the maximum flow on each arc*)
+val graph_fin : 
