@@ -57,7 +57,17 @@ let find_path gr src dest =
   in
   aux gr
 
-  let graph_fin gr =
-    let gr_node = clone_nodes gr in
-    let rec aux acu = 
-      
+  
+  
+  let graph_fin gr gr_ecart =
+    let node =
+    match gr with
+    |
+  
+
+   (* gmap gr (fun x ->
+      let arc = find_arc gr_ecart x.src x.tgt in 
+        match arc with
+        |None -> 0
+        |Some a -> x.lbl - a.lbl)
+*)
