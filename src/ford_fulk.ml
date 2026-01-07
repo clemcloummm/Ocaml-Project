@@ -57,17 +57,16 @@ let find_path gr src dest =
   in
   aux gr
 
-  
-  
-  let graph_fin gr gr_ecart =
-    let node =
-    match gr with
-    |
-  
+  let graph_fin gr gr_ecart = 
+    let gr_vide = clone_nodes gr in 
+    e_fold gr (fun acu arc ->
+      let arc_ecart = find_arc gr_ecart arc.src arc.tgt in
+      let new_label = match arc_ecart with
+        | None -> arc.lbl
+        | Some a -> arc.lbl - a.lbl
+      in
+      let label_str = Printf.sprintf "\"%d/%d\"" new_label arc.lbl in
+      new_arc acu { src = arc.src; tgt = arc.tgt; lbl = label_str}
+    ) gr_vide
 
-   (* gmap gr (fun x ->
-      let arc = find_arc gr_ecart x.src x.tgt in 
-        match arc with
-        |None -> 0
-        |Some a -> x.lbl - a.lbl)
-*)
+  (*Ajouter tests automatiques qui testent si ça fonctionne à peu porès bien, gare à ne pas s'égarer*)
