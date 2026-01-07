@@ -34,17 +34,18 @@ let find_path gr src dest =
   aux [] nodePath
 
   let find_min_capacity arcPath =
-  match arcPath with
-  | [] -> 0
-  | x :: rest -> List.fold_left (fun acc arc -> min acc arc.lbl) x.lbl rest
+    match arcPath with
+      | [] -> 0
+      | x :: rest -> List.fold_left (fun acc arc -> min acc arc.lbl) x.lbl rest
 
   let algo_ford gr src dest =
     let rec aux acu =
       let nodePath = find_path acu src dest in
       match nodePath with
         | [] -> acu 
-        | node_path ->
-          let arcPath = find_arc_path acu node_path in
+        | path ->
+          let arcPath = find_arc_path acu path in
           let minCapa = find_min_capacity arcPath in
+          aux (gmap acu (fun x -> x - minCapa))
   in
   aux gr
