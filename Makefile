@@ -1,8 +1,8 @@
 .PHONY: all build format edit demo clean
 
 src?=0
-dst?=5
-graph?=graph1.txt
+dst?=7
+graph?=graph10.txt
 
 all: build
 
@@ -21,9 +21,15 @@ demo: build
 	@echo "\n   ⚡  EXECUTING  ⚡\n"
 	./ftest.exe graphs/${graph} $(src) $(dst) outfile
 	@echo "\n   🥁  RESULT (content of outfile)  🥁\n"
-	@cat outfile
+	dune exec ./ftest.exe -- graphs/$(graph) $(src) $(dst) output.dot
+	@echo "\n   🎨  GENERATING VISUALIZATION  ⚡\n"
+	dot -Tsvg output.dot > output.svg
 
 clean:
 	find -L . -name "*~" -delete
 	rm -f *.exe
 	dune clean
+
+test:
+	@echo "\n VÉRIFICATION DES TESTS UNITAIRES \n"
+	dune exec src/tests.exe

@@ -1,3 +1,7 @@
+(library
+ (name graph_project)
+ (modules graph tools gfile ford_fulk)
+ (wrapped false))
 
 (executable
    (name ftest)
@@ -8,6 +12,14 @@
 
  ;; Link to executable in main dir
   (promote (until-clean))
+  (modules ftest)
+  (libraries graph_project)
+)
+
+(executable
+  (name tests)
+  (modules tests)
+  (libraries graph_project)
 
 )
 

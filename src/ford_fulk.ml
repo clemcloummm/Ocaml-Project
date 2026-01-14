@@ -63,10 +63,10 @@ let find_path gr src dest =
       let arc_ecart = find_arc gr_ecart arc.src arc.tgt in
       let new_label = match arc_ecart with
         | None -> arc.lbl
-        | Some a -> arc.lbl - a.lbl
+        | Some a -> let flow = arc.lbl - a.lbl in
+        if flow < 0 then 0 else flow
       in
       let label_str = Printf.sprintf "\"%d/%d\"" new_label arc.lbl in
       new_arc acu { src = arc.src; tgt = arc.tgt; lbl = label_str}
     ) gr_vide
 
-  (*Ajouter tests automatiques qui testent si ça fonctionne à peu porès bien, gare à ne pas s'égarer*)
